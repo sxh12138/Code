@@ -564,7 +564,7 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 1. **更新软件包索引**：
    ```bash
    sudo apt update
-   ```
+```
    这个命令会同步软件包索引信息，这是安装、升级或移除软件包之前的必要步骤。
 
 2. **升级所有可升级的软件包**：
@@ -644,7 +644,7 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
     sudo apt autoclean
     ```
     这个命令与 `apt clean` 类似，但只会清除过时的软件包文件。
-$ sudo apt install net-tools tree htop git openssh-server gcc g++ gdb cmake zip unzip python3-pip mysql-server r-base
+    $ sudo apt install net-tools tree htop git openssh-server gcc g++ gdb cmake zip unzip python3-pip mysql-server r-base
 ```
 
 ### 2.2.6 配置 .vimrc
@@ -810,19 +810,19 @@ $ git branch --set-upstream-to=origin/main main
    打开终端并输入以下命令来创建一个新的服务文件：
    ```bash
    sudo nano /etc/systemd/system/curl-on-start.service
-   ```
+```
 
 2. **编写服务文件内容**：
    在编辑器中输入以下内容，将 `https://your-api-endpoint.com` 替换为你想要执行的 `curl` 命令的目标 URL：
    ```ini
    [Unit]
    Description=Run curl on startup
-
+   
    [Service]
    Type=oneshot
    ExecStart=/usr/bin/curl -sSfL https://your-api-endpoint.com
    RemainAfterExit=yes
-
+   
    [Install]
    WantedBy=multi-user.target
    ```
@@ -965,5 +965,5 @@ GRANT ALL PRIVILEGES ON *.* TO 'sxh'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EXIT;
 $ mysql -u sxh -p
-EXIT;123
+EXIT;
 ```
