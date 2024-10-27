@@ -9,35 +9,58 @@ $ winget install JanDeDobbeleer.OhMyPosh -s winget
 # 使用
 $ New-Item -Path $PROFILE -Type File -Force
 $ notepad $PROFILE
-$ oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh | Invoke-Expression
 $ . $PROFILE
 $ oh-my-posh disable notice
+# 编辑配置文件去掉 shell 字段和 time 字段
+$ oh-my-posh config export --output ~/.mytheme.omp.json
+$ notepad++ .\.mytheme.omp.json
+# 重新配置命令
+$ notepad++ $PROFILE
+oh-my-posh init pwsh --config ~/.mytheme.omp.json | Invoke-Expression
+. $PROFILE
 ```
 
-## 1.2 配置 ssh
+## 1.2 配置 ssh、git
 
 ```shell
 $ ssh-keygen -t rsa -b 4096 -C "shiyuhanga@163.com"
+# 查看公钥并将其复制到 github 上
 $ cat ~/.ssh/id_rsa.pub
 $ ssh -T git@github.com
-```
-
-## 1.3 配置 git
-
-```shell
 $ git config --global user.name "sxhwin"
 $ git config --global user.email "shiyuhanga@163.com"
 $ git config --global color.ui auto
+$ git config --global http.proxy 127.0.0.1:7890
+$ git config --global https.proxy 127.0.0.1:7890
+$ git config --global --list
 ```
 
-# 二、WSL-Arch
+## 1.3 配置仓库
+
+```shell
+# 两种克隆方式二选一
+$ git clone git@github.com:sxh12138/AboutLearing.git
+$ git clone https://github.com/sxh12138/AboutLearing.git
+# 添加推送
+$ cd ~/AboutLearing
+$ git add .
+$ git commit -m "1"
+$ git branch -M main
+$ git remote add origin git@github.com:sxh12138/AboutLearing.git
+$ git push -u origin main --force
+$ git branch --set-upstream-to=origin/main main
+```
+
+# 二、WSL-Ubuntu
 
 ## 2.1 安装配置 WSL2
 
 ```shell
 $ wsl --update
 $ wsl --status
-# "C:\Users\shiyuhang\.wslconfig"
+$ cd
+$ notepad++ .wslconfig
 [wsl2]
 memory=4GB
 swap=4GB
@@ -48,6 +71,7 @@ networkingMode=mirrored
 dnsTunneling=true
 firewall=true
 autoProxy=true
+$ wsl --set-default-version 2
 
 # 用法: wsl.exe [Argument] [Options...][CommandLine]
 
@@ -189,16 +213,18 @@ autoProxy=true
         取消注册分发并删除根文件系统。
 ```
 
-## 2.2 安装配置 Arch
+## 2.2 安装配置 Ubuntu
 
-### 2.2.1 下载安装
+# 三、WSL-Arch
+
+## 3.1 下载安装
 
 ```shell
 # 下载地址：https://github.com/yuk7/ArchWSL/releases/download/24.4.28.0/Arch.zip
 # 解压后两次双击运行Arch.exe
 ```
 
-### 2.2.2 配置用户信息
+## 3.2 配置用户信息
 
 ```shell
 # 给 root 设置密码：123123
@@ -218,7 +244,7 @@ $ exit
 $ .\Arch.exe config --default-user sxh
 ```
 
-### 2.2.3 配置 pacman
+## 3.3 配置 pacman
 
 ```shell
 $ sudo pacman-key --init
@@ -231,49 +257,34 @@ $ sudo pacman -Syyu
 $ sudo pacman -S git openssh base-devel gdb cmake tree which unzip wget
 ```
 
-### 2.2.4 安装 oh-my-posh
-
-```shell
-$ mkdir bin
-$ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/bin
-$ vim .bashrc
-PATH=$PATH:/home/sxh/bin
-eval "$(oh-my-posh init bash)"
-$ . .bashrc
-$ oh-my-posh disable notice
-```
-
-### 2.2.5 配置 ssh
+## 3.4 配置 ssh、git
 
 ```shell
 $ ssh-keygen -t rsa -b 4096 -C "shiyuhanga@163.com"
 $ cat ~/.ssh/id_rsa.pub
 $ ssh -T git@github.com
-```
-
-### 2.2.6 配置 git
-
-```shell
 $ git config --global user.name "sxharch"
 $ git config --global user.email "shiyuhanga@163.com"
 $ git config --global color.ui auto
+$ git config --global --list
 ```
 
-### 2.2.7 配置仓库
+## 3.5 配置仓库
 
 ```shell
-$ mkdir AbortLearing
-$ cd AbortLearing
-$ git init
+# 两种克隆方式二选一
+$ git clone git@github.com:sxh12138/AboutLearing.git
+$ git clone https://github.com/sxh12138/AboutLearing.git
+# 添加推送
 $ git add .
-$ git commit -m "first commit"
+$ git commit -m "1"
 $ git branch -M main
 $ git remote add origin git@github.com:sxh12138/AboutLearing.git
 $ git push -u origin main --force
 $ git branch --set-upstream-to=origin/main main
 ```
 
-### 2.2.8 安装Python
+## 3.6 安装Python
 
 ```shell
 $ wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tar.xz && tar -xvf Python-3.11.9.tar.xz && rm -rf *.tar.xz && cd Python-3.11.9
@@ -281,7 +292,7 @@ $ sudo ./configure && sudo make -j 4 && sudo make install
 $ sudo ln -s /usr/local/bin/python3 /usr/local/bin/python
 ```
 
-### 2.2.9 安装 R
+## 3.7 安装 R
 
 ```shell
 $ sudo pacman -S r
@@ -291,7 +302,7 @@ q()
 $ sudo pacman -S r
 ```
 
-### 2.2.10 安装 MySQL
+## 3.8 安装 MySQL
 
 ```shell
 $ sudo pacman -S mysql
@@ -310,8 +321,8 @@ default-character-set=utf8mb4
 default-character-set=utf8mb4
 $ sudo systemctl restart mysqld
 $ mysql -u root -p
-CREATE USER 'sxh'@'localhost' IDENTIFIED BY '123123';
-GRANT ALL PRIVILEGES ON *.* TO 'sxh'@'localhost' WITH GRANT OPTION;
+CREATE USER 'sxh'@'%' IDENTIFIED BY '123123';
+GRANT ALL PRIVILEGES ON *.* TO 'sxh'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EXIT;
 $ mysql -u sxh -p
