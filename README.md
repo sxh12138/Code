@@ -149,7 +149,6 @@ networkingMode=mirrored
 dnsTunneling=true
 firewall=true
 autoProxy=true
-$ wsl --set-default-version 2
 
 # 用法: wsl.exe [Argument] [Options...][CommandLine]
 
@@ -300,35 +299,12 @@ $ wsl --set-default-version 2
 $ wsl -l -o
 # 安装 Ubuntu-24.04
 $ wsl --install -d Ubuntu-24.04
-#设置默认发行版为 Ubuntu
+#设置默认wsl版本以及默认发行版为 Ubuntu
 $ wsl -l -v
+$ wsl --set-default-version 2
 $ wsl --set-default Ubuntu-24.04
 # 安装完成，进入系统
 $ wsl
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
-
-Welcome to Ubuntu 24.04 LTS (GNU/Linux 5.15.153.1-microsoft-standard-WSL2 x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/pro
-
- System information as of Sun Oct 27 12:50:00 CST 2024
-
-  System load:           0.0
-  Usage of /:            0.1% of 1006.85GB
-  Memory usage:          17%
-  Swap usage:            0%
-  Processes:             52
-  Users logged in:       0
-  IPv4 address for eth1: 192.168.1.66
-  IPv6 address for eth1: 2409:8a3c:11cd:8080:6e2:18fe:f913:a36c
-  IPv6 address for eth1: 2409:8a3c:11cd:8080:5dff:a82d:2cbe:4509
-
-
-This message is shown once a day. To disable it please create the
-/home/sxh/.hushlogin file.
 ```
 
 ### 2.2.2 配置 root 密码
@@ -560,91 +536,109 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
 ### 2.2.5 更新软件源、软件、系统以及安装必要软件
 
+##### 1、更新软件包索引：
+
 ```shell
-1. **更新软件包索引**：
-   ```bash
-   sudo apt update
+sudo apt update
 ```
+
    这个命令会同步软件包索引信息，这是安装、升级或移除软件包之前的必要步骤。
 
-2. **升级所有可升级的软件包**：
-   ```bash
-   sudo apt upgrade
-   ```
-   这个命令会升级所有已安装的软件包到最新版本。
+##### 2、升级所有可升级的软件包：
 
-3. **升级系统**：
-   ```bash
-   sudo apt dist-upgrade
-   ```
-   这个命令用于处理更复杂的升级，例如当新的软件包依赖于旧版本的软件包时。
+```bash
+sudo apt upgrade
+```
+这个命令会升级所有已安装的软件包到最新版本。
 
-4. **安装软件包**：
-   ```bash
-   sudo apt install package-name
-   ```
-   将 `package-name` 替换为你想要安装的软件包名称。
+##### 3、升级系统：
 
-5. **移除软件包**：
-   ```bash
-   sudo apt remove package-name
-   ```
-   这个命令会移除软件包，但保留其配置文件。
+```bash
+sudo apt dist-upgrade
+```
+这个命令用于处理更复杂的升级，例如当新的软件包依赖于旧版本的软件包时。
 
-6. **完全移除软件包**：
-   ```bash
-   sudo apt purge package-name
-   ```
-   这个命令会移除软件包及其配置文件。
+##### 4、安装软件包：
 
-7. **自动清理不再需要的软件包**：
-   ```bash
-   sudo apt autoremove
-   ```
-   这个命令会移除所有不再需要的软件包，例如那些被其他软件包依赖的软件包。
+```bash
+sudo apt install package-name
+```
+将 `package-name` 替换为你想要安装的软件包名称。
 
-8. **搜索软件包**：
-   ```bash
-   apt search search-term
-   ```
-   将 `search-term` 替换为你想要搜索的关键词。
+##### 5、移除软件包：
 
-9. **显示软件包信息**：
-   ```bash
-   apt show package-name
-   ```
-   这个命令会显示软件包的详细信息，包括版本、依赖关系和描述。
+```bash
+sudo apt remove package-name
+```
+这个命令会移除软件包，但保留其配置文件。
 
-10. **列出已安装的软件包**：
-    ```bash
-    dpkg -l | grep -i package-name
-    ```
-    这个命令会列出所有已安装的软件包，并使用 `grep` 过滤特定软件包。
+##### 6、完全移除软件包：
 
-11. **列出可升级的软件包**：
-    ```bash
-    apt list --upgradable
-    ```
-    这个命令会列出所有有可用升级版本的软件包。
+```bash
+sudo apt purge package-name
+```
+这个命令会移除软件包及其配置文件。
 
-12. **修复损坏的依赖关系**：
-    ```bash
-    sudo apt --fix-broken install
-    ```
-    这个命令会尝试修复因损坏的依赖关系导致的问题。
+##### 7、自动清理不再需要的软件包：
 
-13. **清除下载的软件包文件**：
-    ```bash
-    sudo apt clean
-    ```
-    这个命令会清除 `/var/cache/apt/archives/` 目录下的所有下载的软件包文件，以释放磁盘空间。
+```bash
+sudo apt autoremove
+```
+这个命令会移除所有不再需要的软件包，例如那些被其他软件包依赖的软件包。
 
-14. **清除下载的软件包文件和缓存**：
-    ```bash
-    sudo apt autoclean
-    ```
-    这个命令与 `apt clean` 类似，但只会清除过时的软件包文件。
-    $ sudo apt install net-tools tree htop git openssh-server gcc g++ gdb cmake zip unzip python3-pip mysql-server r-base
+##### 8、搜索软件包：
+
+```bash
+apt search search-term
+```
+将 `search-term` 替换为你想要搜索的关键词。
+
+##### 9、显示软件包信息：
+
+```bash
+apt show package-name
+```
+这个命令会显示软件包的详细信息，包括版本、依赖关系和描述。
+
+##### 10、清除下载的软件包文件和缓存：
+
+```bash
+dpkg -l | grep -i package-name
+```
+这个命令会列出所有已安装的软件包，并使用 `grep` 过滤特定软件包。
+
+##### 11、列出可升级的软件包：
+
+```bash
+apt list --upgradable
+```
+这个命令会列出所有有可用升级版本的软件包。
+
+##### 12、修复损坏的依赖关系：
+
+```bash
+sudo apt --fix-broken install
+```
+这个命令会尝试修复因损坏的依赖关系导致的问题。
+
+##### 13、清除下载的软件包文件：
+
+```bash
+sudo apt clean
+```
+这个命令会清除 `/var/cache/apt/archives/` 目录下的所有下载的软件包文件，以释放磁盘空间。
+
+##### 14、清除下载的软件包文件和缓存：
+
+```bash
+sudo apt autoclean
+```
+这个命令与 `apt clean` 类似，但只会清除过时的软件包文件。
+
+##### 15、安装必要软件：
+
+```shell
+$ sudo apt install net-tools tree htop git openssh-server gcc g++ gdb cmake zip unzip python3-pip  r-base mysql-server nginx
 ```
 
 ### 2.2.6 配置 .vimrc
@@ -695,8 +689,8 @@ plugins=(
 )
 # 配置别名
 alias ll='ls -lah'
-alias update='sudo apt update && sudo apt upgrade && sudo apt dist-upgrade'
-. .zshrc
+alias update='sudo apt update && sudo apt upgrade && sudo apt dist-upgrade'                               
+$ . .zshrc
 # 配置powerlevel10k
 $ p10k configure
 ```
@@ -704,7 +698,7 @@ $ p10k configure
 ### 2.2.8 配置 ssh、git
 
 ```shell
-$ systemctl status ssh
+$ systemctl status ssh（Ubuntu 24.04 第一次安装 ssh 后，需要在主机或者别的地方连接一次才会自动）
 # 创建密钥对
 $ ssh-keygen -t rsa -b 4096 -C "shiyuhanga@163.com"
 # 查看公钥并将其复制到 github 上
@@ -732,10 +726,118 @@ $ git push -u origin main --force
 $ git branch --set-upstream-to=origin/main main
 ```
 
+### 2.2.10 配置 Python
 
+```shell
+$ which python3
+/usr/bin/python3
+$ sudo ln -s /usr/bin/python3.12 /usr/bin/python
+$ ll /usr/bin/python*
+lrwxrwxrwx 1 root root   19 Oct 27 18:31 /usr/bin/python -> /usr/bin/python3.12
+lrwxrwxrwx 1 root root   10 Aug  8 01:44 /usr/bin/python3 -> python3.12
+lrwxrwxrwx 1 root root   17 Aug  8 01:44 /usr/bin/python3-config -> python3.12-config
+-rwxr-xr-x 1 root root 7.7M Sep 11 22:17 /usr/bin/python3.12
+lrwxrwxrwx 1 root root   34 Sep 11 22:17 /usr/bin/python3.12-config -> x86_64-linux-gnu-python3.12-config
+```
+
+### 2.2.11 配置 R
+
+```shell
+$ R
+install.packages("ggplot2")
+q()
+```
+
+### 2.2.12 配置 mysql
+
+```shell
+$ sudo systemctl start mysql
+$ sudo systemctl enable mysql
+$ sudo mysql_secure_installation
+$ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+[mysqld]
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+bind-address            = 0.0.0.0
+mysqlx-bind-address     = 0.0.0.0
+
+[client]
+default-character-set=utf8mb4
+
+[mysql]
+default-character-set=utf8mb4
+$ sudo systemctl restart mysql
+ss -antp | grep 3306
+LISTEN 0      151           0.0.0.0:3306       0.0.0.0:*
+LISTEN 0      70            0.0.0.0:33060      0.0.0.0:*
+# 重设 root 密码
+$ sudo cat /etc/mysql/debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = A5RZfhmDhYuuDp8l
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = A5RZfhmDhYuuDp8l
+socket   = /var/run/mysqld/mysqld.sock
+$ mysql -u  debian-sys-maint -p
+A5RZfhmDhYuuDp8l
+mysql> SET GLOBAL validate_password.policy = LOW;
+mysql> SET GLOBAL validate_password.length = 6;
+mysql> ALTER user 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123123';
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+mysql> select User, Host FROM mysql.user;
++------------------+-----------+
+| User             | Host      |
++------------------+-----------+
+| debian-sys-maint | localhost |
+| mysql.infoschema | localhost |
+| mysql.session    | localhost |
+| mysql.sys        | localhost |
+| root             | localhost |
++------------------+-----------+
+
+mysql> SET GLOBAL validate_password.policy = LOW;
+mysql> SET GLOBAL validate_password.length = 6;
+mysql> CREATE USER 'sxh'@'%' IDENTIFIED BY '123123';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'sxh'@'%' WITH GRANT OPTION;
+mysql> FLUSH PRIVILEGES;
+mysql> EXIT;
+$ mysql -u sxh -p
+mysql> EXIT;
+```
+
+### 2.2.13 配置 nginx
+
+```shell
+$ sudo systemctl status nginx
+$ sudo systemctl enable nginx
+$ sudo vim /etc/nginx/sites-available/default
+$ sudo rm -rf /var/www/html/*
+$ sudo chown -R sxh:sxh /var/www/html
+# 将 index.html 传送到根目录下（文件过大，不要直接复制粘贴，wsl承受不住）
+```
+
+**index.html 效果图：**
+
+![](./README.assets/BananaMonkey.png)
+
+**index.html 源代码：**
 
 ```html
-<pre id="tiresult" style="font-size: 9px; background-color: #000000; font-weight: bold; padding: 4px 5px; --fs: 9px;"><b style="color:#000000">00100001011110110110101010101001100111011110110010101111001110001011100101110000111000010001000111111101101010001010110111011</b>
+<pre id="tiresult" style="font-size: 12px; background-color: #000000; font-weight: bold; padding: 4px 5px; --fs: 9px;"><b style="color:#000000">00100001011110110110101010101001100111011110110010101111001110001011100101110000111000010001000111111101101010001010110111011</b>
 <b style="color:#000000">11010001001100010101010010101101100010101110101001000110000110001101001110011010001000000000101001100001111101000110011111111</b>
 <b style="color:#000000">00110010011011101011110001100110110110000000001100111001110110101111110111110010100010100111000100011001001110001000100000100</b>
 <b style="color:#000000">10000101110011101010111111001111101000110110</b><b style="color:#0A0A0A">0</b><b style="color:#1A1A1A">1</b><b style="color:#252525">1</b><b style="color:#2C2C2C">1</b><b style="color:#343434">0</b><b style="color:#393939">0</b><b style="color:#3C3C3C">0</b><b style="color:#2B2B2B">1</b><b style="color:#161616">1</b><b style="color:#000000">011100000100001010001111010111011011101110101010100011010011100011000110</b>
@@ -801,169 +903,3 @@ $ git branch --set-upstream-to=origin/main main
 </pre>
 ```
 
-```shell
-在 Ubuntu 24.04 LTS 上，推荐使用 **系统服务** 方法来在每次开机时执行 `curl` 命令。这是因为从 Ubuntu 18.04 开始，`rc.local` 文件不再被默认启用，而使用 systemd 服务可以提供更好的控制和可靠性。
-
-以下是为 Ubuntu 24.04 LTS 创建系统服务的步骤：
-
-1. **创建一个新的 systemd 服务文件**：
-   打开终端并输入以下命令来创建一个新的服务文件：
-   ```bash
-   sudo nano /etc/systemd/system/curl-on-start.service
-```
-
-2. **编写服务文件内容**：
-   在编辑器中输入以下内容，将 `https://your-api-endpoint.com` 替换为你想要执行的 `curl` 命令的目标 URL：
-   ```ini
-   [Unit]
-   Description=Run curl on startup
-   
-   [Service]
-   Type=oneshot
-   ExecStart=/usr/bin/curl -sSfL https://your-api-endpoint.com
-   RemainAfterExit=yes
-   
-   [Install]
-   WantedBy=multi-user.target
-   ```
-   这个服务文件定义了一个一次性执行的服务，该服务在系统启动时运行。
-
-3. **保存并关闭编辑器**：
-   如果你使用的是 `nano`，可以按 `Ctrl+X`，然后按 `Y` 确认保存，最后按 `Enter` 键退出。
-
-4. **启用并启动服务**：
-   在终端中运行以下命令来启用服务，并使其在系统启动时自动运行：
-   ```bash
-   sudo systemctl enable curl-on-start.service
-   sudo systemctl start curl-on-start.service
-   ```
-
-5. **检查服务状态**：
-   你可以使用以下命令检查服务的状态，以确保它已被正确设置：
-   ```bash
-   sudo systemctl status curl-on-start.service
-   ```
-
-通过这种方式，你可以确保每次系统启动时，指定的 `curl` 命令都会被执行。这种方法比使用 `cron` 或已废弃的 `rc.local` 更为现代和可靠。
-```
-
-
-
-# 三、WSL-Arch
-
-## 3.1 下载安装
-
-```shell
-# 下载地址：https://github.com/yuk7/ArchWSL/releases/download/24.4.28.0/Arch.zip
-# 解压后两次双击运行Arch.exe
-```
-
-## 3.2 配置用户信息
-
-```shell
-# 给 root 设置密码：123123
-$ passwd
-New password:
-Retype new password:
-passwd: password updated successfully
-# 创建用户 sxh 并设置密码
-$ echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
-$ useradd -m -G wheel -s /bin/bash sxh
-$ passwd sxh
-New password:
-Retype new password:
-passwd: password updated successfully
-$ exit
-# 在 Arch.exe 所在文件夹下打开 powershell
-$ .\Arch.exe config --default-user sxh
-```
-
-## 3.3 配置 pacman
-
-```shell
-$ sudo pacman-key --init
-$ sudo p$cman-key --populate
-$ sudo pacman -Syy archlinux-keyring
-# 换源（清华大学源）添加到首行
-$ sudo vim /etc/pacman.d/mirrorlist
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
-$ sudo pacman -Syyu
-$ sudo pacman -S git openssh base-devel gdb cmake tree which unzip wget
-```
-
-## 3.4 配置 ssh、git
-
-```shell
-# 创建密钥对
-$ ssh-keygen -t rsa -b 4096 -C "shiyuhanga@163.com"
-# 查看公钥并将其复制到 github 上
-$ cat ~/.ssh/id_rsa.pub
-$ ssh -T git@github.com
-# 配置 git
-$ git config --global user.name "sxharch"
-$ git config --global user.email "shiyuhanga@163.com"
-$ git config --global color.ui auto
-$ git config --global http.proxy 127.0.0.1:7890
-$ git config --global https.proxy 127.0.0.1:7890
-$ git config --global --list
-```
-
-## 3.5 配置仓库
-
-```shell
-# 两种克隆方式二选一
-$ git clone git@github.com:sxh12138/AboutLearing.git
-$ git clone https://github.com/sxh12138/AboutLearing.git
-# 添加推送
-$ git add .
-$ git commit -m "1"
-$ git branch -M main
-$ git remote add origin git@github.com:sxh12138/AboutLearing.git
-$ git push -u origin main --force
-$ git branch --set-upstream-to=origin/main main
-```
-
-## 3.6 安装Python
-
-```shell
-$ wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tar.xz && tar -xvf Python-3.11.9.tar.xz && rm -rf *.tar.xz && cd Python-3.11.9
-$ sudo ./configure && sudo make -j 4 && sudo make install
-$ sudo ln -s /usr/local/bin/python3 /usr/local/bin/python
-```
-
-## 3.7 安装 R
-
-```shell
-$ sudo pacman -S r
-$ R
-install.packages("ggplot2")
-q()
-$ sudo pacman -S r
-```
-
-## 3.8 安装 MySQL
-
-```shell
-$ sudo pacman -S mysql
-$ sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-$ sudo systemctl start mysqld && sudo systemctl enable mysqld
-$ sudo mysql_secure_installation
-$ sudo vim /etc/my.cnf
-[mysqld]
-character-set-server=utf8mb4
-collation-server=utf8mb4_unicode_ci
-
-[client]
-default-character-set=utf8mb4
-
-[mysql]
-default-character-set=utf8mb4
-$ sudo systemctl restart mysqld
-$ mysql -u root -p
-CREATE USER 'sxh'@'%' IDENTIFIED BY '123123';
-GRANT ALL PRIVILEGES ON *.* TO 'sxh'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-EXIT;
-$ mysql -u sxh -p
-EXIT;
-```
