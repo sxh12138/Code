@@ -1,4 +1,3 @@
-// PTA 习题 7-5
 // 输出倒三角图案
 #include <stdio.h>
 int main(void){

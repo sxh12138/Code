@@ -1,4 +1,3 @@
-// PTA 习题 7-16
 // 计算符号函数的值
 #include <stdio.h>
 int main(void){

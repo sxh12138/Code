@@ -1,4 +1,3 @@
-// PTA 习题 7-30
 // 念数字
 #include <stdio.h>
 #include <math.h>

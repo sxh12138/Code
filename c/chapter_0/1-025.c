@@ -1,4 +1,3 @@
-// PTA 习题 7-29
 // 二分法求解
 #include <stdio.h>
 double fun(double a0,double a1,double a2,double a3,double x);

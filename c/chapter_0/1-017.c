@@ -1,4 +1,3 @@
-// PTA 习题 7-20
 // 简单计算器
 #include <stdio.h>
 int main(void){

@@ -1,4 +1,3 @@
-// PTA 习题 7-19
 // 计算天数
 #include <stdio.h>
 int main(void){

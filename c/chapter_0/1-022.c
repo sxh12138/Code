@@ -1,4 +1,3 @@
-// PTA 习题 7-26
 // 最大公约数和最小公倍数
 #include <stdio.h>
 int main(void){

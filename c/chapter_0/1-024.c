@@ -1,4 +1,3 @@
-// PTA 习题 7-28
 // 求整数的位数及各位数字之和
 #include <stdio.h>
 int main(void){

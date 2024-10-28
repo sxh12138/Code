@@ -1,4 +1,3 @@
-// PTA 习题 7-32
 // 求交错序列前 N 项和
 #include <stdio.h>
 #include <math.h>

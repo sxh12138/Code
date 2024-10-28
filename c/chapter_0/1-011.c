@@ -1,4 +1,3 @@
-// PTA 习题 7-14
 // 然后是几点
 #include <stdio.h>
 int main(void){

@@ -1,4 +1,3 @@
-// PTA 习题 7-23
 // 分段计算居民水费
 #include <stdio.h>
 int main(void){

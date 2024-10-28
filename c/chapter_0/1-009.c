@@ -1,4 +1,3 @@
-// PTA 习题 7-12
 // 日期格式化
 #include <stdio.h>
 int main(void){

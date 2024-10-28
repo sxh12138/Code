@@ -1,4 +1,3 @@
-# PTA 习题 7-10
 # 算术入门之加减乘除
 a, b = map(int,input().split())
 print("{} + {} = {}".format(a,b,a + b))

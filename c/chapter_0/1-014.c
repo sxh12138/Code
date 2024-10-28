@@ -1,4 +1,3 @@
-// PTA 习题 7-17
 // 成绩转换
 #include <stdio.h>
 int main(void){

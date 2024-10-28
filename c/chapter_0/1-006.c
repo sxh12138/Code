@@ -1,4 +1,3 @@
-// PTA 习题 7-9
 // 求整数均值
 #include <stdio.h>
 int main(void){

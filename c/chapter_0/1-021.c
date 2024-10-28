@@ -1,4 +1,3 @@
-// PTA 习题 7-25
 // 求奇数和
 #include <stdio.h>
 int main(void){

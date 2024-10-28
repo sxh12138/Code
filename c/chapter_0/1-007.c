@@ -1,4 +1,3 @@
-// PTA 习题 7-10
 // 算术入门之加减乘除
 #include <stdio.h>
 int main(void){

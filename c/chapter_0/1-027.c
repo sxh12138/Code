@@ -1,4 +1,3 @@
-// PTA 习题 7-31
 // 掉入陷阱的数字
 #include <stdio.h>
 int fun(int n);

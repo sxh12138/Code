@@ -1,4 +1,3 @@
-// PTA 习题 7-27
 // 兔子繁衍问题
 #include <stdio.h>
 int fab(int x);

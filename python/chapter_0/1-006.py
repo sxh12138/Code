@@ -1,4 +1,3 @@
-# PTA 习题 7-9
 # 求整数均值
 a, b, c, d = map(int,input().split())
 sum_value = a + b + c + d

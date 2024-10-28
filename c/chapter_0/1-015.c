@@ -1,4 +1,3 @@
-// PTA 习题 7-18
 // 出租车计价
 #include <stdio.h>
 int main(void){

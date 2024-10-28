@@ -1,4 +1,3 @@
-// PTA 习题 7-24
 // 猜数字游戏
 #include <stdio.h>
 int main(void){

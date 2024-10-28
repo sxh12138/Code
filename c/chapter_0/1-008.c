@@ -1,4 +1,3 @@
-// PTA 习题 7-11
 // 计算平均分
 #include <stdio.h>
 int main(void){

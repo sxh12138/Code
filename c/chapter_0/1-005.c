@@ -1,4 +1,3 @@
-// PTA 习题 7-7
 // 计算摄氏温度
 #include <stdio.h>
 int main(void){

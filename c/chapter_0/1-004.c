@@ -1,4 +1,3 @@
-// PTA 习题 7-6
 // 厘米换算英尺英寸
 #include <stdio.h>
 int main(void){

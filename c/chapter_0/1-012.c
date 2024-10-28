@@ -1,4 +1,3 @@
-// PTA 习题 7-15
 // BCD 解密
 #include <stdio.h>
 int main(void){

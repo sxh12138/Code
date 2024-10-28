@@ -1,4 +1,3 @@
-// PTA 习题 7-22
 // 用天平找小球
 #include <stdio.h>
 int main(void){
